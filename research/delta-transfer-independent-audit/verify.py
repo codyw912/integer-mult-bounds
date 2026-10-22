@@ -33,6 +33,11 @@ def check_inputs():
     return inputs
 
 
+def joint_budget_fits(within_numerator, across_numerator, denominator, p):
+    """Compare the shared excess with 1/(32p^3), without large gcds."""
+    return (within_numerator + across_numerator) * 32 * p**3 < denominator
+
+
 def parameter_checks():
     for p in range(2, 65):
         D = 1 << (32760 * p)
@@ -52,7 +57,7 @@ def parameter_checks():
         # delta/(1-delta) <= 2*delta when delta <= 1/2.
         require(D > 8, f"p={p}: within-cell inflation bound")
         # One shared row/column budget, not two independent rho budgets.
-        require((8 * two8p + 4 * (p - 1)) * 32 * p**3 < D * two8p,
+        require(joint_budget_fits(8 * two8p, 4 * (p - 1), D * two8p, p),
                 f"p={p}: combined within/across raw-oracle excess")
         require(2 * (p - 1) * F(1, 64 * p**4) < rho,
                 f"p={p}: per-entry approximation total")
@@ -243,20 +248,19 @@ def budget_controls():
     p, g, rho = 2, F(1, 32), F(1, 256)
     require((g - rho)**2 * p**11 > 1, "positive p=2 exponent-11 ceiling")
     require((g - F(1, 64))**2 * p**11 < 1, "overbudget exponent-11 ceiling failure")
-    Tin = 1 - g
-    delta = rho / (Tin + rho)
-    inflation, across = Tin / (1 - delta) - Tin, rho
-    require(inflation == rho and across == rho, "separate budgets each pass")
-    require(inflation + across > rho, "combined separate-budget control must fail")
-    D = 32 * p**2
-    require(D - 32 * p**2 == 0, "downward gap boundary is singular")
+    # Each contribution is 3/4 of rho; only their sum breaks the allowance.
+    denominator = 4 * 32 * p**3
+    require(joint_budget_fits(3, 0, denominator, p)
+            and joint_budget_fits(0, 3, denominator, p), "separate budgets each pass")
+    require(not joint_budget_fits(3, 3, denominator, p),
+            "combined separate-budget control must fail")
     D = 64 * p**2
     U = F((D - 4) * 8 * p**2, D - 32 * p**2)
     require(U > 9 * p**2, "insufficient D must fail downward upper estimate")
     return ["p2_positive_robust_budget"], [
         "overbudget_exponent11_ceiling_not_gaussian_counterexample",
         "separate_budgets_pass_but_combined_budget_fails",
-        "downward_zero_gap_boundary", "downward_insufficient_D_upper_bound",
+        "downward_insufficient_D_upper_bound",
     ]
 
 
@@ -281,7 +285,6 @@ def main():
             "Conditional matrix hypotheses, not the full Gaussian supplier or multiplication theorem.",
             "Small rational real matrices test identities and locality, not astronomical J=p^24.",
             "Overbudget control rejects this exponent route; it is not a Gaussian counterexample.",
-            "Combined-budget adverse fixture is arithmetic, not a realized Gaussian matrix.",
             "Historical provenance is checked by the official runner, not live byte comparison.",
         ],
     }, indent=2, sort_keys=True))

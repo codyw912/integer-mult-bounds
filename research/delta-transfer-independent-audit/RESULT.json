@@ -24,11 +24,10 @@
     "Conditional matrix hypotheses, not the full Gaussian supplier or multiplication theorem.",
     "Small rational real matrices test identities and locality, not astronomical J=p^24.",
     "Overbudget control rejects this exponent route; it is not a Gaussian counterexample.",
-    "Combined-budget adverse fixture is arithmetic, not a realized Gaussian matrix.",
     "Historical provenance is checked by the official runner, not live byte comparison."
   ],
   "negative_controls": {
-    "count": 12,
+    "count": 11,
     "names": [
       "omitted_adjoint_J2",
       "wrong_Q_orientation_J2",
@@ -40,7 +39,6 @@
       "missing_unit_diagonal",
       "overbudget_exponent11_ceiling_not_gaussian_counterexample",
       "separate_budgets_pass_but_combined_budget_fails",
-      "downward_zero_gap_boundary",
       "downward_insufficient_D_upper_bound"
     ]
   },

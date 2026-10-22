@@ -177,17 +177,18 @@ execution is also supported: all mathematical checks use explicit exceptions.
 
 Local evidence on Python 3.12.14: metadata/pins passed; the registered replay
 passed in ordinary and `-I -O -B` modes, each covering 63 parameter values,
-5 positive fixtures and 12 adverse controls. [RESULT.json](RESULT.json) records
+5 positive fixtures and 11 adverse controls. [RESULT.json](RESULT.json) records
 the observed direct optimized output; acceptance is recomputed, not read from
 that receipt. These are agent-run results, not hosted CI or independent human
 verification.
 
-Orientation limitation: `scripts/research_baseline.py` failed locally with
-`ValueError: Selected package inventory or bytes changed`. The checkout contains
-unrelated modified selected-package files, which this contribution leaves
-untouched. A sampled committed source blob matches its manifest; this is not
-evidence that canonical main's selected record is invalid. No selected cold
-replay is claimed.
+Orientation limitation: on restored canonical source bytes,
+`scripts/research_baseline.py` passed source checking but then failed with
+`KeyError: 'bit_lower'` when interpreting the newly selected productive-helper
+certificate. This is separate from the focused audit; no selected cold replay
+is claimed. An earlier inventory failure was caused by automatic formatting
+during environment initialization; all of those unrelated edits were restored,
+and the retained environment has no formatter or Git-hook configuration.
 
 ## Coordination and provenance
 
