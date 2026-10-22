@@ -1,0 +1,59 @@
+{
+  "claim": "conditional PR4462 at 89548dc186c9c90d459085b6d1be4834977705b9",
+  "combined_budget": "checked jointly for every integer p=2..64",
+  "fixtures": {
+    "count": 5,
+    "names": [
+      "nonnormal_3x3_row_and_column_inverse_bounds",
+      "nonnormal_residual_identity_J2",
+      "nonnormal_residual_identity_J3",
+      "principal_section_center_polynomial_locality",
+      "p2_positive_robust_budget"
+    ]
+  },
+  "input_sha256": {
+    "count": 3,
+    "paths": [
+      "references/semantic-bulk/rad20/reports/downstream-phase-cell-inverse.md",
+      "research/capped-fusion-t74-k554/vendor/pr1786/FINE-PRIME-PADDING.md",
+      "research/capped-phase-fusion/LOG-A-PHASE-SCHUR-AUDIT.md"
+    ]
+  },
+  "limitations": [
+    "Finite p=2..64 checks are not the all-p proof in README.md.",
+    "Conditional matrix hypotheses, not the full Gaussian supplier or multiplication theorem.",
+    "Small rational real matrices test identities and locality, not astronomical J=p^24.",
+    "Overbudget control rejects this exponent route; it is not a Gaussian counterexample.",
+    "Combined-budget adverse fixture is arithmetic, not a realized Gaussian matrix.",
+    "Historical provenance is checked by the official runner, not live byte comparison."
+  ],
+  "negative_controls": {
+    "count": 12,
+    "names": [
+      "omitted_adjoint_J2",
+      "wrong_Q_orientation_J2",
+      "omitted_adjoint_J3",
+      "wrong_Q_orientation_J3",
+      "near_edge_polynomial_disagreement",
+      "inverse_not_finitely_local",
+      "row_only_hypothesis_insufficient",
+      "missing_unit_diagonal",
+      "overbudget_exponent11_ceiling_not_gaussian_counterexample",
+      "separate_budgets_pass_but_combined_budget_fails",
+      "downward_zero_gap_boundary",
+      "downward_insufficient_D_upper_bound"
+    ]
+  },
+  "no_new_kappa": true,
+  "parameters": {
+    "arithmetic": "integer/Fraction",
+    "bandwidth_and_agreement_radius": "(2J-1)W < p^26 and (2J+1)W < p^26",
+    "cases": 63,
+    "combined_budget": "8/D + 4(p-1)/(D*2^(8p)) < 1/(32p^3)",
+    "downward": "8p^2 < U < 9p^2; U^2 < p^11; U < p^6",
+    "error": "B < p^6 and J*p^-22 = p^2; no astronomical polynomial evaluated",
+    "p_max": 64,
+    "p_min": 2
+  },
+  "status": "PASS_DELTA_TRANSFER_INDEPENDENT_AUDIT"
+}

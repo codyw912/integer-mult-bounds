@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "ready",
+  "python": "3.12",
+  "requirements": [],
+  "inputs": [
+    "references/semantic-bulk/rad20/reports/downstream-phase-cell-inverse.md",
+    "research/capped-fusion-t74-k554/vendor/pr1786/FINE-PRIME-PADDING.md",
+    "research/capped-phase-fusion/LOG-A-PHASE-SCHUR-AUDIT.md"
+  ],
+  "commands": [
+    {
+      "argv": [
+        "{python}",
+        "-B",
+        "{package}/verify.py"
+      ],
+      "timeout_seconds": 120,
+      "checks": "Independent exact parameter bounds, combined rounding budget, nonnormal polynomial residuals, section agreement and meaningful failure controls"
+    },
+    {
+      "argv": ["{python}", "-I", "-O", "-B", "{package}/verify.py"],
+      "timeout_seconds": 120,
+      "checks": "Repeat all mathematical and failure controls with Python assertions disabled"
+    }
+  ]
+}

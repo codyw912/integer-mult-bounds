@@ -14,3 +14,9 @@ build/
 *.toc
 *.out
 *.synctex.gz
+
+# Local development environment state
+.direnv/
+.devenv/
+devenv.local.nix
+devenv.local.yaml
